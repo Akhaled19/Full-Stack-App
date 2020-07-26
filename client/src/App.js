@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, NavLink} from 'react-router-dom';
 import axios from 'axios';
 import config from './config';
 
@@ -34,9 +34,9 @@ class App extends Component {
           <Route path='/courses/create' component={CreatCourse} />
           <Route path='/courses/:id/update' component={UpdateCourse} />
           <Route path='courses/:id' component={CourseDetail} />
-          <Route path='/signin' component={UserSignIn} />
-          <Route path='/signup' component={UserSignUp} />
-          <Route path='/signout' component={UserSignOut} />
+          <NavLink path='/signin' component={UserSignIn} />
+          <NavLink path='/signup' component={UserSignUp} />
+          <NavLink path='/signout' component={UserSignOut} />
         </Switch>
       </BrowserRouter>
     );
