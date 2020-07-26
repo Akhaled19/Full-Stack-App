@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import config from './config';
-import logo from './logo.svg';
-import './App.css';
 
-
+import Courses from './components/Courses';
+import CreatCourse from './components/CreateCourse';
+import CourseDetail from './components/CourseDetail';
+import UpdateCourse from './components/UpdateCourse';
+import UserSignIn from './components/UserSignIn';
+import UserSignUp from './components/UserSignUp';
+import UserSignOut from './components/UserSignOut';
 
 class App extends Component {
   constructor() {
@@ -23,22 +28,17 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path='/courses' component={Courses} />
+          <Route path='/courses/create' component={CreatCourse} />
+          <Route path='/courses/:id/update' component={UpdateCourse} />
+          <Route path='courses/:id' component={CourseDetail} />
+          <Route path='/signin' component={UserSignIn} />
+          <Route path='/signup' component={UserSignUp} />
+          <Route path='/signout' component={UserSignOut} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }  
