@@ -24,7 +24,7 @@ class UpdateCourse extends Component {
                                     required/>
                                     <p>Author Name</p>
                                 </div>
-                                <div class="course--description">
+                                <div className="course--description">
                                     <div>
                                         <textarea 
                                             id={}

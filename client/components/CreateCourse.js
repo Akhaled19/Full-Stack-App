@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {NavLink} from 'react-router-dom';
+
 
 class CreateCourse extends Component {
     render() {
@@ -33,13 +33,15 @@ class CreateCourse extends Component {
                             <p>By ${}</p> //user's name
                         </div> 
                         <div className="course--description">
-                            <textarea 
-                                id={}
-                                name={}
-                                type={}
-                                className="Course description..."
-                                value={}
-                            required/>
+                            <div>
+                                <textarea 
+                                    id={}
+                                    name={}
+                                    type={}
+                                    className="Course description..."
+                                    value={}
+                                required/>
+                            </div>
                         </div>
                     </div>
                     <div className="grid-25 grid-right">
@@ -73,8 +75,8 @@ class CreateCourse extends Component {
                         </div>
                     </div>
                     <div class="grid-100 pad-bottom">
-                        <NavLink className="button" type="submit" tp="">Create Course</NavLink>
-                        <NavLink className="button button-secondary" to="">Cancel</NavLink>
+                        <button className="button" type="submit" to="">Create Course</button>
+                        <button className="button button-secondary" to="">Cancel</button>
                     </div>       
                 </form> 
             </Fragment>

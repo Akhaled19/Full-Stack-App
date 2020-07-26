@@ -9,8 +9,8 @@ class CourseDetails extends Component {
                     <div className="bounds">
                         <div className="grid-100">
                             <span>
-                                <NavLink className="button" to="">Update Course</NavLink>
-                                <NavLink className="button" to="">Delete Course</NavLink>
+                                <button className="button" to="">Update Course</button>
+                                <button className="button" to="">Delete Course</button>
                             </span>
                             <NavLink className="button button-secondary" to="/courses">Return to the List</NavLink>
                         </div>
