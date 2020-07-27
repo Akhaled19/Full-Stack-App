@@ -23,23 +23,23 @@ class CreateCourse extends Component {
                         </div>
                         <div>
                             <input 
-                                id={}
-                                name={}
-                                type={}
+                                id=""
+                                name=""
+                                type=""
                                 className="input-title course--title--input"
                                 placeholder="Course title..."
-                                value={}
+                                value=""
                             required/>
                             <p>By ${}</p> //user's name
                         </div> 
                         <div className="course--description">
                             <div>
                                 <textarea 
-                                    id={}
-                                    name={}
-                                    type={}
+                                    id=""
+                                    name=""
+                                    type=""
                                     className="Course description..."
-                                    value={}
+                                    value=""
                                 required/>
                             </div>
                         </div>
@@ -51,12 +51,12 @@ class CreateCourse extends Component {
                                     <h4>Estimated Time</h4>
                                     <div>
                                         <input 
-                                            id={}
-                                            name={}
-                                            type={}
+                                            id=""
+                                            name=""
+                                            type=""
                                             className="course--time--input"
                                             placeholder="Hours" 
-                                            value={}
+                                            value=""
                                         required/>
                                     </div>
                                 </li>
@@ -64,8 +64,8 @@ class CreateCourse extends Component {
                                     <h4>Materials Needed</h4>
                                     <div>
                                         <textarea 
-                                            id={} 
-                                            name={}
+                                            id=""
+                                            name=""
                                             className="" 
                                             placeholder="List materials..."
                                         required/>

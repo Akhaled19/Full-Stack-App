@@ -15,23 +15,23 @@ class UpdateCourse extends Component {
                                 <h4 className="course--label">Course</h4>
                                 <div>
                                     <input 
-                                        id={}
-                                        name={}
-                                        type={}
+                                        id=""
+                                        name=""
+                                        type=""
                                         className=""
                                         placeholder="Course title..."
-                                        value={}
+                                        value=""
                                     required/>
                                     <p>Author Name</p>
                                 </div>
                                 <div className="course--description">
                                     <div>
                                         <textarea 
-                                            id={}
-                                            name={}
+                                            id=""
+                                            name=""
                                             className=""
                                             placeholder="Course description..."
-                                            value={}
+                                            value=""
                                         required/>
                                     </div>
                                 </div>
