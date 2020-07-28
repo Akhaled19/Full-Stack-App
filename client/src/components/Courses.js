@@ -27,10 +27,10 @@ class Courses extends Component {
             <Fragment>
                 <div className="bounds">
                     {this.state.courses.map(course =>
-                        <div className="grid-33">
+                        <div className="grid-33" key={course.id}>
                             <Link className="course--module course--link" to="">
                                 <h4 className="course--label">Course</h4>
-                                <h3 className="course--title" key={course.id}>{course.title}</h3>
+                                <h3 className="course--title">{course.title}</h3>
                             </Link>
                         </div>
                     )}
