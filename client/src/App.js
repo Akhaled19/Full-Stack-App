@@ -4,6 +4,7 @@ import './styles/global.css';
 // import axios from 'axios';
 // import config from './config';
 
+import Header from './components/Header';
 import Courses from './components/Courses';
 // import CreatCourse from './components/CreateCourse';
 // import CourseDetail from './components/CourseDetail';
@@ -30,6 +31,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route path='/courses' component={Courses} />
           {/* <Route path='/courses/create' component={CreatCourse} />
