@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import './styles/global.css';
 // import axios from 'axios';
 // import config from './config';
 
