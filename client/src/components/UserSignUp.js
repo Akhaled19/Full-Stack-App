@@ -100,9 +100,14 @@ class UserSignUp extends Component {
             })
             .catch( err => { //handle rejected promise
                 console.log(err);
-                this.props.history.push('/error'); //push to history stack
+                this.props.history.push('/error'); //push error path to history stack
             })
-    }
+    };
+
+    //when a user cancel registration
+    cancel = () => {
+        this.props.history.push('/') //push root path to history stack
+    };
 
 } 
 export default UserSignUp;
