@@ -13,6 +13,7 @@ import Courses from './components/Courses';
 // import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 // import UserSignOut from './components/UserSignOut';
+import NotFound from './components/NotFound';
 
 //Subscribe components to context changes
 const userSignUpWithContext = withContext(UserSignUp);
@@ -39,6 +40,7 @@ class App extends Component {
         <Switch>
           <Route path='/courses' component={Courses} />
           <NavLink path='/signup' component={userSignUpWithContext} />
+          <Route component={NotFound}/>
           {/* <Route path='/courses/create' component={CreatCourse} />
           <Route path='/courses/:id/update' component={UpdateCourse} />
           <Route path='courses/:id' component={CourseDetail} />
