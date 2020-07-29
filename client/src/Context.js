@@ -5,8 +5,11 @@ const Context = React.createContext();
 
 export default class Provider extends Component {
     render() {
+        const value = {
+            data: this.data
+        };
         return (
-            <Context.Provider value={}>
+            <Context.Provider value={value}>
                 {this.props.children}
             </Context.Provider>
         )
