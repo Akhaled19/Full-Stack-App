@@ -4,14 +4,18 @@ import './styles/global.css';
 // import axios from 'axios';
 // import config from './config';
 
+import withContext from './Context';
 import Header from './components/Header';
 import Courses from './components/Courses';
 // import CreatCourse from './components/CreateCourse';
 // import CourseDetail from './components/CourseDetail';
 // import UpdateCourse from './components/UpdateCourse';
 // import UserSignIn from './components/UserSignIn';
-// import UserSignUp from './components/UserSignUp';
+import UserSignUp from './components/UserSignUp';
 // import UserSignOut from './components/UserSignOut';
+
+//Subscribe components to context changes
+const userSignUpWithContext = withContext(UserSignUp);
 
 class App extends Component {
   // constructor() {
@@ -34,6 +38,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path='/courses' component={Courses} />
+          <NavLink path='/signup' component={userSignUpWithContext} />
           {/* <Route path='/courses/create' component={CreatCourse} />
           <Route path='/courses/:id/update' component={UpdateCourse} />
           <Route path='courses/:id' component={CourseDetail} />
