@@ -3,9 +3,24 @@ import {Link} from 'react-router-dom';
 
 class UserSignUp extends Component {
     state = {
-            
+        firstName: '',
+        lastName: '',
+        emailAddress: '',
+        password: '',
+        confirmPassword: '',
+        errors: [],     
     }
+
     render() {
+        const {
+            firstName,
+            lastName,
+            emailAddress,
+            password,
+            confirmPassword,
+            errors, 
+        } = this.state;
+        
         return(
             <Fragment>
                 <div class="bounds">
