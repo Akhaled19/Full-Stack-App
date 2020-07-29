@@ -1,6 +1,10 @@
 import React, {Component, Fragment} from 'react';
+import {Link} from 'react-router-dom';
 
 class UserSignUp extends Component {
+    state = {
+            
+    }
     render() {
         return(
             <Fragment>
@@ -66,11 +70,38 @@ class UserSignUp extends Component {
                             </form>
                         </div>
                         <p>&nbsp;</p>
-                        <p>Already have a user account? <a href="sign-in.html">Click here</a> to sign in!</p>
+                        <p>Already have a user account? <Link to="/signin">Click here</Link> to sign in!</p>
                     </div>
                 </div>
           </Fragment>
         )
+    }
+
+    //create a user
+    submit = () => {
+        const { context } = this.props;
+
+        //new payload
+        const user = {
+            firstName,
+            lastName,
+            emailAddress,
+            password,
+            confirmPassword
+        };
+        context.data.createUser(user)
+            .then(errors => {
+                if(errors.length) {
+                    this.setState({errors});
+                }
+                else {
+                    console.log('success');
+                }
+            })
+            .catch( err => { //handle rejected promise
+                console.log(err);
+                this.props.history.push('/error'); //push to history stack
+            })
     }
 
 } 
