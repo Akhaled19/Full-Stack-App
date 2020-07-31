@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch, NavLink} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 // import axios from 'axios';
 // import config from './config';
@@ -36,18 +36,21 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route path='/courses' component={Courses} />
-          <Route path='/signup' component={userSignUpWithContext} />
-          <Route component={NotFound}/>
-          {/* <Route path='/courses/create' component={CreatCourse} />
-          <Route path='/courses/:id/update' component={UpdateCourse} />
-          <Route path='courses/:id' component={CourseDetail} />
-          <NavLink path='/signin' component={UserSignIn} />
-          <NavLink path='/signup' component={UserSignUp} />
-          <NavLink path='/signout' component={UserSignOut} /> */}
-        </Switch>
+        <div>
+          <Header />
+          <Switch>
+            <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
+            <Route path='/courses' component={Courses} />
+            <Route path='/signup' component={userSignUpWithContext} />
+            <Route component={NotFound}/>
+            {/* <Route path='/courses/create' component={CreatCourse} />
+            <Route path='/courses/:id/update' component={UpdateCourse} />
+            <Route path='courses/:id' component={CourseDetail} />
+            <NavLink path='/signin' component={UserSignIn} />
+            <NavLink path='/signup' component={UserSignUp} />
+            <NavLink path='/signout' component={UserSignOut} /> */}
+          </Switch>
+        </div>
       </BrowserRouter>
     );
   }
