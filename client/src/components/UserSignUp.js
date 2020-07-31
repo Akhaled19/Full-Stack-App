@@ -23,7 +23,7 @@ export default class UserSignUp extends Component {
         } = this.state;
 
         return(
-            <div class="bounds">
+            <div className="bounds">
                 <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
                     <Form 
@@ -41,7 +41,7 @@ export default class UserSignUp extends Component {
                                     placeholder="First Name" 
                                     value={firstName}
                                     onChange={this.change}
-                                required/>
+                                />
                                 <input 
                                     id="lastName" 
                                     name="lastName" 
@@ -50,7 +50,7 @@ export default class UserSignUp extends Component {
                                     placeholder="Last Name" 
                                     value={lastName}
                                     onChange={this.change}
-                                required/>
+                                />
                                 <input 
                                     id="emailAddress" 
                                     name="emailAddress" 
@@ -59,7 +59,7 @@ export default class UserSignUp extends Component {
                                     placeholder="Email Address" 
                                     value={emailAddress}
                                     onChange={this.change}
-                                required/>
+                                />
                                 <input 
                                     id="password" 
                                     name="password" 
@@ -68,7 +68,7 @@ export default class UserSignUp extends Component {
                                     placeholder="Password" 
                                     value={password} 
                                     onChange={this.change}
-                                required/>
+                                />
                                 <input 
                                     id="confirmPassword" 
                                     name="confirmPassword" 
@@ -77,7 +77,7 @@ export default class UserSignUp extends Component {
                                     placeholder="Confirm Password"
                                     value={confirmPassword} 
                                     onChange={this.change}
-                                required/>
+                                />
                             </React.Fragment> 
                         )}   
                     />
