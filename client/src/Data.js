@@ -31,28 +31,27 @@ export default class Data {
 
         //check if the auth is required
         if(requiresAuth){
+            //btoa() method creates a base-64 encoded ASCII string from a ‘string’ of data.
             const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+            //send an authorization header on each required auth request 
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
         return fetch(url)
     }
 
     //method perform a sync operation that get an authenticated user
-    async getUser(username, password){
-        const response = await this.api('/users', 'GET', null, true, {username, password});
+    async getUser(emailAddress, password){
+        const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
         if(response.status === 200){
             return response.json().then(data => data);
         }
-        else if(response.status === 401){
+        if(response.status === 401){
             return null;
         }
-        else{
-            throw new Error();
-            
-        }
+        throw new Error();
     }
 
-    //method perform a sync operation that get an authenticated user
+    //method perform a sync operation that create user
     async createUser(user){
         const response = await this.api('users', 'POST', user);
         if(response.status === 201){

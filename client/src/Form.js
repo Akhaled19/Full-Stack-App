@@ -33,7 +33,7 @@ const Form = ({cancel, errors, submit, submitButtonText, elements}) => {
     return (
         <div>
             <ErrorsDisplay errors={errors} />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 { elements() }
                 <div className="grid-100 pad-bottom">
                     <button className="button" type="submit">{submitButtonText}</button>
