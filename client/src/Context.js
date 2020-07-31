@@ -3,7 +3,7 @@ import Data from './Data';
 
 const Context = React.createContext();
 
-export default class Provider extends Component {
+export class Provider extends Component {
     render() {
         const value = {
             data: this.data
