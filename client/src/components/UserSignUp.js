@@ -31,7 +31,7 @@ export default class UserSignUp extends Component {
                         errors={errors}
                         submit={this.submit}
                         submitButtonText="Sign Up"
-                        elments={()=> (
+                        elements={()=> (
                             <React.Fragment>
                                 <input 
                                     id="firstName" 
@@ -40,6 +40,7 @@ export default class UserSignUp extends Component {
                                     className="" 
                                     placeholder="First Name" 
                                     value={firstName}
+                                    onChange={this.change}
                                 required/>
                                 <input 
                                     id="lastName" 
@@ -48,6 +49,7 @@ export default class UserSignUp extends Component {
                                     className="" 
                                     placeholder="Last Name" 
                                     value={lastName}
+                                    onChange={this.change}
                                 required/>
                                 <input 
                                     id="emailAddress" 
@@ -56,6 +58,7 @@ export default class UserSignUp extends Component {
                                     className="" 
                                     placeholder="Email Address" 
                                     value={emailAddress}
+                                    onChange={this.change}
                                 required/>
                                 <input 
                                     id="password" 
@@ -64,6 +67,7 @@ export default class UserSignUp extends Component {
                                     className="" 
                                     placeholder="Password" 
                                     value={password} 
+                                    onChange={this.change}
                                 required/>
                                 <input 
                                     id="confirmPassword" 
@@ -72,6 +76,7 @@ export default class UserSignUp extends Component {
                                     className="" 
                                     placeholder="Confirm Password"
                                     value={confirmPassword} 
+                                    onChange={this.change}
                                 required/>
                             </React.Fragment> 
                         )}   
@@ -82,6 +87,18 @@ export default class UserSignUp extends Component {
             </div>
         )
     }
+
+    //update the input fields
+    change = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        this.setState(() => {
+            return {
+                [name]: value
+            }
+        });
+    } 
 
     //create a user
     submit = () => {
