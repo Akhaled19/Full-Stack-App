@@ -18,11 +18,11 @@ class UserSignIn extends Component {
 
         return(
             <Fragment>
-                <div class="bounds">
-                    <div class="grid-33 centered signin">
+                <div className="bounds">
+                    <div className="grid-33 centered signin">
                         <h1>Sign In</h1>
                         <Form
-                            cancle={this.cancel}
+                            cancel={this.cancel}
                             errors={errors}
                             submit={this.submit}
                             submitButtonText="Sign In"
