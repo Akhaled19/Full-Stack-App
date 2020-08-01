@@ -16,8 +16,9 @@ import UserSignUp from './components/UserSignUp';
 import NotFound from './components/NotFound';
 
 //Subscribe components to context changes
-const userSignUpWithContext = withContext(UserSignUp);
-const userSignInwithContext = withContext(UserSignIn);
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInwithContext = withContext(UserSignIn);
+const HeaderWithContext = withContext(Header);
 
 class App extends Component {
   // constructor() {
@@ -38,12 +39,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header />
+          <HeaderWithContext />
           <Switch>
             <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
             <Route path='/courses' component={Courses} />
-            <Route path='/signin' component={userSignInwithContext} />
-            <Route path='/signup' component={userSignUpWithContext} />
+            <Route path='/signin' component={UserSignInwithContext} />
+            <Route path='/signup' component={UserSignUpWithContext} />
             <Route component={NotFound}/>
             {/* <Route path='/courses/create' component={CreatCourse} />
             <Route path='/courses/:id/update' component={UpdateCourse} />
