@@ -12,13 +12,23 @@ export class Provider extends Component {
     
     render() {
         const value = {
-            data: this.data
+            data: this.data,
+            actions: {
+                signIn: this.sigIn
+            }
         };
         return (
             <Context.Provider value={value}>
                 {this.props.children}
             </Context.Provider>
         )
+    }
+
+    sigIn = async (emailAddress, password) => {
+        const user = await this.data.getUser(emailAddress, password);
+        return {
+            user
+        }
     }
 }
 
