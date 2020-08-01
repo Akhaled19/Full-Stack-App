@@ -12,14 +12,6 @@ import React from 'react';
 
 
 const Form = ({cancel, errors, submit, submitButtonText, elements}) => {
-    // const {
-    //     cancel,
-    //     errors,
-    //     submit,
-    //     submitButtonText,
-    //     elements
-    // } = props
-
     function handleSubmit(event) {
         event.preventDefault();
         submit();
