@@ -53,7 +53,7 @@ export default class Data {
 
     //method perform a sync operation that create user
     async createUser(user){
-        const response = await this.api('users', 'POST', user);
+        const response = await this.api('/users', 'POST', user);
         if(response.status === 201){
             return [];
         }
