@@ -80,18 +80,17 @@ class UserSignIn extends Component {
             password,
         } = this.state
 
-        //new payload
-        const user = {
-            emailAddress,
-            password,
-        };
-        context.data.getUser(user)
-            .then(errors => {
-                if(errors.length) {
-                    this.setState({errors});
+    
+        context.actions.signIn(emailAddress, password)
+            .then((user) => {
+                if(user === null ) {
+                    this.setState(() => {
+                        return {errors: ['Sign-in was unsuccessful']} 
+                    });
                 }
                 else {
-                    console.log('success');
+                    this.props.history.push('')
+                    console.log(`success: ${emailAddress} is now signed in!`)
                 }
             })
             .catch( err => { //handle rejected promise
