@@ -53,8 +53,8 @@ export default class Data {
     } 
 
     //method perform a syn operation that get a courses by its id 
-    async getCourse(){
-        const response = await this.api('/courses/:id', 'GET', null, false, null);
+    async getCourse(courseId){
+        const response = await this.api(`/courses/${courseId}`, 'GET', null, false, null);
         if(response.status === 200){
             return response.json().then(data => data);
         }
