@@ -36,8 +36,21 @@ export default class Data {
             //send an authorization header on each required auth request 
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
-        return fetch(url)
+        return fetch(url, options)
     }
+
+    //method perform a syn operation that get list of courses 
+    async getCourses(){
+        const response = await this.api('/courses', 'GET', null, false, null);
+        if(response.status === 200){
+            return response.json().then(data => data);
+        }
+        if(response.status === 404){
+            console.log(response)
+            return null;
+        }
+        throw new Error();
+    } 
 
     //method perform a sync operation that get an authenticated user
     async getUser(emailAddress, password){
