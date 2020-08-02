@@ -7,8 +7,8 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import withContext from './Context';
 import Header from './components/Header';
 import Courses from './components/Courses';
-// import CreatCourse from './components/CreateCourse';
-// import CourseDetail from './components/CourseDetail';
+//import CreatCourse from './components/CreateCourse';
+import CourseDetail from './components/CourseDetail';
 // import UpdateCourse from './components/UpdateCourse';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
@@ -20,6 +20,7 @@ const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInwithContext = withContext(UserSignIn);
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
+const CourseDetailWithContext = withContext(CourseDetail);
  
 class App extends Component {
   // constructor() {
@@ -45,12 +46,12 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
             <Route path='/courses' component={CoursesWithContext} />
+            <Route path='courses/:id' component={CourseDetailWithContext} />
             <Route path='/signin' component={UserSignInwithContext} />
             <Route path='/signup' component={UserSignUpWithContext} />
             <Route component={NotFound}/>
             {/* <Route path='/courses/create' component={CreatCourse} />
             <Route path='/courses/:id/update' component={UpdateCourse} />
-            <Route path='courses/:id' component={CourseDetail} />
             <NavLink path='/signout' component={UserSignOut} /> */}
           </Switch>
         </div>
