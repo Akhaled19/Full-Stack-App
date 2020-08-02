@@ -1,32 +1,38 @@
 import React, {Component, Fragment} from 'react';
 import {NavLink, Link} from 'react-router-dom'
-import config from '../config';
-import axios from 'axios';
+// import config from '../config';
+// import axios from 'axios';
 
 class Courses extends Component {
-    constructor() {
-        super();
-        this.state={
-            courses: []
-        }
-      }
+    state = {
+      courses: []
+    };
+
+      /**
+       * At componentDidMount the getCourses() method is called from context.
+       * State properties 'courses' are set using the data returned from getCourses().
+       * Errors are caught and logged using catch() and the user is routed to the '/error' endpoint 
+       */
     
       componentDidMount = () => {
-        this.courses();
+        const { context } = this.props;
+        context.data.getCourses()
+            .then(response => {
+                console.log(response.courses);
+                this.setState({courses: response.courses})
+            })
+            .catch( err => {
+                console.error(err);
+                this.props.history.push('/error');
+            })
       }
-        courses = () => {
-            const apiBaseUrl = config.apiBaseUrl;
-            axios.get(apiBaseUrl)
-                .then(response => {
-                    console.log(response.data);
-                    this.setState({courses: response.data})
-                })
-        }        
+     
     render() {
+        const { courses} = this.state;
         return (
             <Fragment>
                 <div className="bounds">
-                    {this.state.courses.map(course =>
+                    {courses.map(course =>
                         <div className="grid-33" key={course.id}>
                             <Link className="course--module course--link" to={`/courses/${course.id}`}>
                                 <h4 className="course--label">Course</h4>
