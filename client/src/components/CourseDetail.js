@@ -2,7 +2,29 @@ import React, {Component, Fragment} from 'react';
 import {NavLink} from 'react-router-dom'
 
 class CourseDetails extends Component {
+    state={
+        course: {},
+    }
+
+    /**
+     * At componentDidMount the getCourse() method is called from context.
+     * State property 'course' is set using the data returned from getCourse().
+     * Errors are caught and logged using catch() and the user is routed to the '/error' endpoint 
+    */
+    componentDidMount() {
+        const {context} = this.props;
+        context.data.getCourse()
+        .then(response => {
+            console.log(response.course);
+        })
+        .catch(err => {
+            console.error(err);
+            this.props.history.push('/error');
+        })
+    }
+
     render() {
+        const {course} = this.state;
         return(
             <Fragment>
                 <div className="actions--bar">
@@ -12,15 +34,15 @@ class CourseDetails extends Component {
                                 <button className="button" to="">Update Course</button>
                                 <button className="button" to="">Delete Course</button>
                             </span>
-                            <NavLink className="button button-secondary" to="/courses">Return to the List</NavLink>
+                            <NavLink className="button button-secondary" to="/">Return to the List</NavLink>
                         </div>
                     </div>
                     <div className="bounds course--detail">
                         <div className="grid-66">
                             <div className="course--header">
                                 <h4 className="course--label">Course</h4>
-                                <h3 className="course--title">course title</h3>
-                                <p>Author name</p>
+                                <h3 className="course--title">{course.title}</h3>
+                                <p>{}</p>
                             </div>
                         </div>
                         <div class="course--description">
@@ -36,7 +58,6 @@ class CourseDetails extends Component {
                                     <li className="course--stats--list--item">
                                         <h4>Materials Needed</h4>
                                         <ul>
-                                         //loop through Materials
                                             <li></li>
                                         </ul>
                                     </li>
