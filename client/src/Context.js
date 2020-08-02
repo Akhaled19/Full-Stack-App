@@ -5,6 +5,7 @@ const Context = React.createContext();
 
 export class Provider extends Component {
     state = {
+        //authenticatedUser state property is assigned null or to the cookie authenticatedUser
         authenticatedUser: null
     }
 
@@ -14,7 +15,8 @@ export class Provider extends Component {
     }
     
     render() {
-        const  {authenticatedUser}= this.state,
+        const  {authenticatedUser} = this.state;
+
         const value = {
             authenticatedUser,
             data: this.data,
@@ -31,16 +33,14 @@ export class Provider extends Component {
 
     sigIn = async (emailAddress, password) => {
         const user = await this.data.getUser(emailAddress, password);
-        if(user !== null){
+        if(user === 200){
             this.setState(() => {
                 return {
                     authenticatedUser: user,
-                }
-            })
+                };
+            });
         }
-        return {
-            user
-        }
+        return user
     }
 }
 
