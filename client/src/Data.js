@@ -52,6 +52,19 @@ export default class Data {
         throw new Error();
     } 
 
+    //method perform a syn operation that get a courses by its id 
+    async getCourse(){
+        const response = await this.api('/courses/:id', 'GET', null, false, null);
+        if(response.status === 200){
+            return response.json().then(data => data);
+        }
+        if(response.status === 404){
+            console.log(response)
+            return null;
+        }
+        throw new Error();
+    }
+
     //method perform a sync operation that get an authenticated user
     async getUser(emailAddress, password){
         const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
