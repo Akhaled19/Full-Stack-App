@@ -19,7 +19,8 @@ import NotFound from './components/NotFound';
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInwithContext = withContext(UserSignIn);
 const HeaderWithContext = withContext(Header);
-
+const CoursesWithContext = withContext(Courses);
+ 
 class App extends Component {
   // constructor() {
   //   super();
@@ -40,9 +41,10 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <HeaderWithContext />
+
           <Switch>
             <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
-            <Route path='/courses' component={Courses} />
+            <Route path='/courses' component={CoursesWithContext} />
             <Route path='/signin' component={UserSignInwithContext} />
             <Route path='/signup' component={UserSignUpWithContext} />
             <Route component={NotFound}/>
