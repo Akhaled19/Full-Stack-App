@@ -30,7 +30,7 @@ router.get('/courses', asyncHandler(async(req, res) => {
             },
         ]
     });
-    res.json(courses);
+    res.json({courses});
 }))
 
 
