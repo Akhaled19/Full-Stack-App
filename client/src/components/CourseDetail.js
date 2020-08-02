@@ -4,6 +4,8 @@ import {NavLink} from 'react-router-dom'
 class CourseDetails extends Component {
     state={
         course: {},
+        user: {},  
+        materials: [],
     }
 
     /**
@@ -13,18 +15,31 @@ class CourseDetails extends Component {
     */
     componentDidMount() {
         const {context} = this.props;
-        context.data.getCourse()
+        const {id} = this.props.match.params;
+
+        context.data.getCourse(id)
         .then(response => {
-            console.log(response.course);
+            if(response) {
+                let  materials = response.course.materialsNeeded;
+                // if(materials !== null )
+                console.log(response.course);
+                this.setState({
+                    course: response.course,
+                    materials: materials,
+                    user: response.course.userInfo,
+                })
+            } else {
+                this.props.history.push('/notfound');
+            }    
         })
         .catch(err => {
             console.error(err);
             this.props.history.push('/error');
-        })
+        });
     }
 
     render() {
-        const {course} = this.state;
+        const {course, materials, user} = this.state;
         return(
             <Fragment>
                 <div className="actions--bar">
@@ -42,23 +57,23 @@ class CourseDetails extends Component {
                             <div className="course--header">
                                 <h4 className="course--label">Course</h4>
                                 <h3 className="course--title">{course.title}</h3>
-                                <p>{}</p>
+                                <p>By {user.firstName} {user.lastName}</p>
                             </div>
                         </div>
-                        <div class="course--description">
-                            <p>Loop through pargraphs</p>
+                        <div className="course--description">
+                            <p>{course.description}</p>
                         </div>
-                        <div class="grid-25 grid-right">
-                            <div class="course--stats">
+                        <div className="grid-25 grid-right">
+                            <div className="course--stats">
                                 <ul className="course--stats--list">
                                     <li className="course--stats--list--item">
                                         <h4>Estimated Time</h4>
-                                        <h3>Hourse</h3>
+                                        <h3>{course.estimatedTime}</h3>
                                     </li>
                                     <li className="course--stats--list--item">
                                         <h4>Materials Needed</h4>
                                         <ul>
-                                            <li></li>
+                                            <li>{materials}</li>
                                         </ul>
                                     </li>
                                 </ul>
