@@ -58,7 +58,7 @@ router.get('/courses/:id', setCourse, asyncHandler(async(req, res) => {
             },
         ]
     });
-    res.json(setCourse.course); 
+    res.json({course: setCourse.course}); 
 }));
 
 
