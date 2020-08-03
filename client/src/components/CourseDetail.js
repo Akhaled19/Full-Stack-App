@@ -29,7 +29,7 @@ class CourseDetails extends Component {
                     user: response.course.userInfo,
                 })
             } else {
-                this.props.history.push('/notfound');
+                throw new Error();
             }    
         })
         .catch(err => {
