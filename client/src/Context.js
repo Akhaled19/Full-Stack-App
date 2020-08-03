@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
 import Data from './Data';
+import Cookies from 'js-cookie';
 
 const Context = React.createContext();
 
 export class Provider extends Component {
     state = {
         //authenticatedUser state property is assigned null or to the cookie authenticatedUser
-        authenticatedUser: null
+        authenticatedUser: Cookies.getJSON('authenticatedUser') || null
     }
 
     constructor(){
@@ -22,16 +23,22 @@ export class Provider extends Component {
             data: this.data,
             actions: {
                 signIn: this.sigIn,
-                signOut: this.signOut  
-            }
+                signOut: this.signOut,  
+            },
         };
+
         return (
             <Context.Provider value={value}>
                 {this.props.children}
             </Context.Provider>
-        )
+        );
     }
-    //sign in function checks if user has credentials and set the authenticatedUser state to the user
+
+    /***
+     * 'signIn' method takes two parameters 'emailAddress' and 'passwors' as the credentials 
+     *  If the HTTP response is 200, the user from the response is assigned to the authenticatedUser state property and the authenticatedUser cookie
+     *  Else, returns an empty 'user' 
+    */
     sigIn = async (emailAddress, password) => {
         const user = await this.data.getUser(emailAddress, password);
         if(user === 200){
@@ -40,18 +47,23 @@ export class Provider extends Component {
                     authenticatedUser: user,
                 };
             });
+            Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1});
         }
         return user
     }
-    //sign out function loges out the user and sets the authenticatedUser state back to null
+    /***
+     * 'signOut' method 
+     *  It sets the authenticatedUser state property to null
+     * And it removes the authenticatedUser cookie
+    */
     signOut() {
         this.setState(() => {
             return {
                 authenticatedUser: null
             }
-        })
+        });
+        Cookies.remove('authenticatedUser');
     }
-
 }
 
 export const Consumer = Context.Consumer;
