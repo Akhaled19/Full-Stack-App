@@ -21,7 +21,8 @@ export class Provider extends Component {
             authenticatedUser,
             data: this.data,
             actions: {
-                signIn: this.sigIn
+                signIn: this.sigIn,
+                signOut: this.signOut  
             }
         };
         return (
@@ -30,7 +31,7 @@ export class Provider extends Component {
             </Context.Provider>
         )
     }
-
+    //sign in function checks if user has credentials and set the authenticatedUser state to the user
     sigIn = async (emailAddress, password) => {
         const user = await this.data.getUser(emailAddress, password);
         if(user === 200){
@@ -42,6 +43,15 @@ export class Provider extends Component {
         }
         return user
     }
+    //sign out function loges out the user and sets the authenticatedUser state back to null
+    signOut() {
+        this.setState(() => {
+            return {
+                authenticatedUser: null
+            }
+        })
+    }
+
 }
 
 export const Consumer = Context.Consumer;
