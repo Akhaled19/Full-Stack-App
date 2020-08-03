@@ -12,12 +12,13 @@ import CourseDetail from './components/CourseDetail';
 // import UpdateCourse from './components/UpdateCourse';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
-// import UserSignOut from './components/UserSignOut';
+import UserSignOut from './components/UserSignOut';
 import NotFound from './components/NotFound';
 
 //Subscribe components to context changes
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInwithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
@@ -49,10 +50,11 @@ class App extends Component {
             <Route path='courses/:id' component={CourseDetailWithContext} />
             <Route path='/signin' component={UserSignInwithContext} />
             <Route path='/signup' component={UserSignUpWithContext} />
+            <Route path='/signout' component={UserSignOutWithContext}/>
             <Route component={NotFound}/>
             {/* <Route path='/courses/create' component={CreatCourse} />
             <Route path='/courses/:id/update' component={UpdateCourse} />
-            <NavLink path='/signout' component={UserSignOut} /> */}
+            */}
           </Switch>
         </div>
       </BrowserRouter>
