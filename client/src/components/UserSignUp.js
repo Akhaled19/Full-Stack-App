@@ -127,6 +127,9 @@ export default class UserSignUp extends Component {
                 }
                 else {
                     console.log('success');
+                    context.actions.signIn(emailAddress, password)
+                    //redirect the user back to the page they were trying to access once they’re authenticated 
+                    .then(this.props.history.push('/'))
                 }
             })
             .catch( err => { //handle rejected promise
