@@ -24,7 +24,7 @@ export default class Data {
             },
         };
 
-        //stringified the body if the body if provided
+        //stringified the body if the body is provided
         if(body !== null) {
             options.body = JSON.stringify(body);
         }
@@ -32,14 +32,18 @@ export default class Data {
         //check if the auth is required
         if(requiresAuth){
             //btoa() method creates a base-64 encoded ASCII string from a ‘string’ of data.
-            const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+            const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
             //send an authorization header on each required auth request 
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
         return fetch(url, options)
     }
 
-    //method perform a syn operation that get list of courses 
+    /** 
+     * 'getCourses' method perform a syn operation that get list of courses 
+     * If the HTTP response is 200, the response data is returned.
+     * If the HTTP response is 404, the response is logged to the console and null is returned 
+    */
     async getCourses(){
         const response = await this.api('/courses', 'GET', null, false, null);
         if(response.status === 200){
@@ -52,32 +56,53 @@ export default class Data {
         throw new Error();
     } 
 
-    //method perform a syn operation that get a courses by its id 
+    /** 
+     * 'getCourse' method perform a syn operation that returns a course with an id that matches the parameter 'courseId'
+     * @param {number} courseId 
+     * If the HTTP response is 200, the response data is returned.
+     * If the HTTP response is 404, the response is logged to the console and null is returned
+     * A new error is thrown when an unexpected error occurs 
+    */
     async getCourse(courseId){
         const response = await this.api(`/courses/${courseId}`, 'GET', null, false, null);
         if(response.status === 200){
             return response.json().then(data => data);
         }
         if(response.status === 404){
-            console.log(response)
+            console.log(response.status);
+            console.log(response.statusText)
             return null;
         }
         throw new Error();
     }
 
-    //method perform a sync operation that get an authenticated user
+    /** 
+     * 'getUser' method perform a syn operation that returns a user with credentials that matches the parameters 'emailAddress' and 'password'
+     * @param {string} emailAddress 
+     * @param {string} password 
+     * If the HTTP response is 200, the response data is returned.
+     * If the HTTP response is 404, the response is logged to the console and null is returned
+     * A new error is thrown when an unexpected error occurs 
+    */
     async getUser(emailAddress, password){
         const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
         if(response.status === 200){
             return response.json().then(data => data);
         }
         if(response.status === 401){
+            console.log(response.statusText);
             return null;
         }
         throw new Error();
     }
 
-    //method perform a sync operation that create user
+    /** 
+     * 'createUser' method perform a syn operation that creates a user with provided body. The body contains properties assigned to new user details
+     * @param {object} user 
+     * If the HTTP response is 201, an emprty array is returned 
+     * If the HTTP response is 400, the response data errors are returned 
+     * A new error is thrown when an unexpected error occurs 
+    */
     async createUser(user){
         const response = await this.api('/users', 'POST', user);
         if(response.status === 201){
