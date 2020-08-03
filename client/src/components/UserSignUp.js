@@ -37,7 +37,6 @@ export default class UserSignUp extends Component {
                                     id="firstName" 
                                     name="firstName" 
                                     type="text"    
-                                    className="" 
                                     placeholder="First Name" 
                                     value={firstName}
                                     onChange={this.change}
@@ -45,8 +44,7 @@ export default class UserSignUp extends Component {
                                 <input 
                                     id="lastName" 
                                     name="lastName" 
-                                    type="text" 
-                                    className="" 
+                                    type="text"
                                     placeholder="Last Name" 
                                     value={lastName}
                                     onChange={this.change}
@@ -55,7 +53,6 @@ export default class UserSignUp extends Component {
                                     id="emailAddress" 
                                     name="emailAddress" 
                                     type="text" 
-                                    className="" 
                                     placeholder="Email Address" 
                                     value={emailAddress}
                                     onChange={this.change}
@@ -64,7 +61,6 @@ export default class UserSignUp extends Component {
                                     id="password" 
                                     name="password" 
                                     type="password" 
-                                    className="" 
                                     placeholder="Password" 
                                     value={password} 
                                     onChange={this.change}
@@ -73,7 +69,6 @@ export default class UserSignUp extends Component {
                                     id="confirmPassword" 
                                     name="confirmPassword" 
                                     type="password" 
-                                    className="" 
                                     placeholder="Confirm Password"
                                     value={confirmPassword} 
                                     onChange={this.change}
@@ -112,30 +107,39 @@ export default class UserSignUp extends Component {
             confirmPassword,
         } = this.state
 
-        //new payload
+        //new payload will be send to the API
         const user = {
             firstName,
             lastName,
             emailAddress,
             password,
-            confirmPassword,
         };
-        context.data.createUser(user)
-            .then(errors => {
-                if(errors.length) {
-                    this.setState({errors});
-                }
-                else {
-                    console.log('success');
-                    context.actions.signIn(emailAddress, password)
-                    //redirect the user back to the page they were trying to access once they’re authenticated 
-                    .then(this.props.history.push('/'))
-                }
-            })
-            .catch( err => { //handle rejected promise
-                console.log(err);
-                this.props.history.push('/error'); //push error path to history stack
-            })
+
+        //before creates a user, checks if the password matches the confirmPassword
+        if(confirmPassword === password) {
+            //create a new user async and retrurns a promise 
+            context.data.createUser(user)
+                .then(errors => {
+                    if(errors.length) {
+                        this.setState({errors: errors});
+                    }
+                    else {
+                        console.log('success');
+                        context.actions.signIn(emailAddress, password)
+                        //redirect the user back to the page they were trying to access once they’re authenticated 
+                        .then(this.props.history.push('/'))
+                    }
+                })
+                .catch( err => { //handle rejected promise
+                    console.log('Something went wrong', err);
+                    this.props.history.push('/error'); //push error path to history stack
+                })
+            //else, set the errors state property to an a string with error details     
+        }  else {
+            this.setState({
+                errors: 'Passwords do not match.'
+            });
+        }  
     };
 
     //when a user cancel registration
