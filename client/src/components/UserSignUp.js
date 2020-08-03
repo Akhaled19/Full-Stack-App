@@ -121,13 +121,13 @@ export default class UserSignUp extends Component {
             context.data.createUser(user)
                 .then(errors => {
                     if(errors.length) {
-                        this.setState({errors: errors});
+                        this.setState({ errors });
                     }
                     else {
-                        console.log('success');
+                        console.log(`${emailAddress} is succesfully signed up and authenticated!`);
                         context.actions.signIn(emailAddress, password)
                         //redirect the user back to the page they were trying to access once they’re authenticated 
-                        .then(this.props.history.push('/'))
+                        .then(() => this.props.history.push('/'))
                     }
                 })
                 .catch( err => { //handle rejected promise
