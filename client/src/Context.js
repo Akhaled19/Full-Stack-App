@@ -41,7 +41,7 @@ export class Provider extends Component {
     */
     sigIn = async (emailAddress, password) => {
         const user = await this.data.getUser(emailAddress, password);
-        if(user === 200){
+        if(user){
             this.setState(() => {
                 return {
                     authenticatedUser: user,
@@ -56,12 +56,10 @@ export class Provider extends Component {
      *  It sets the authenticatedUser state property to null
      * And it removes the authenticatedUser cookie
     */
-    signOut() {
-        this.setState(() => {
-            return {
-                authenticatedUser: null
-            }
-        });
+    signOut = () => {
+        this.setState( () => {
+            return {authenticatedUser: null};
+          });
         Cookies.remove('authenticatedUser');
     }
 }
