@@ -46,14 +46,27 @@ function ErrorsDisplay({ errors }) {
             <div>
                 <h2 className="validation--errors--label">Validation errors</h2>
                 <div className="validation-errors">
-                    <ur>
+                    <ul>
                         {errors.map((error, i) =>
                          <li key={i}>{error.message}</li>
                         )}
-                    </ur>
+                    </ul>
                 </div>
             </div>
-        );
+        )
+    }  else if(errors.length && typeof errors === 'string') {
+        errorsDisplay = (
+            <div>
+                <h2 className="validation--errors--label">Validation errors</h2>
+                <div className="validation-errors">
+                    <ul>
+                        <li key={1}>{errors}</li>
+                    </ul>
+                </div>
+            </div>
+        );  
     }
+           
+  
     return errorsDisplay;
 }

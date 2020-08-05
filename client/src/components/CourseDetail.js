@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {NavLink} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 class CourseDetails extends Component {
     state={
@@ -40,48 +40,58 @@ class CourseDetails extends Component {
 
     render() {
         const {course, materials, user} = this.state;
+        const authUser = this.context.authenticatedUser;
+
         return(
-            <Fragment>
-                <div className="actions--bar">
-                    <div className="bounds">
-                        <div className="grid-100">
-                            <span>
-                                <button className="button" to="">Update Course</button>
-                                <button className="button" to="">Delete Course</button>
-                            </span>
-                            <NavLink className="button button-secondary" to="/">Return to the List</NavLink>
-                        </div>
-                    </div>
-                    <div className="bounds course--detail">
-                        <div className="grid-66">
-                            <div className="course--header">
-                                <h4 className="course--label">Course</h4>
-                                <h3 className="course--title">{course.title}</h3>
-                                <p>By {user.firstName} {user.lastName}</p>
+            <div>
+                { authUser ?
+                <Fragment>
+                    <div className="actions--bar">
+                        <div className="bounds">
+                            <div className="grid-100">
+                                <span>
+                                    <Link className="button" to={`/courses/${course.id}/update`}>Update Course</Link>
+                                    <Link className="button" to={`/courses/${course.id}/delete`}>Delete Course</Link>
+                                </span>
+                                <Link className="button button-secondary" to="/">Return to the List</Link>
                             </div>
                         </div>
-                        <div className="course--description">
-                            <p>{course.description}</p>
-                        </div>
-                        <div className="grid-25 grid-right">
-                            <div className="course--stats">
-                                <ul className="course--stats--list">
-                                    <li className="course--stats--list--item">
-                                        <h4>Estimated Time</h4>
-                                        <h3>{course.estimatedTime}</h3>
-                                    </li>
-                                    <li className="course--stats--list--item">
-                                        <h4>Materials Needed</h4>
-                                        <ul>
-                                            <li>{materials}</li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                        <div className="bounds course--detail">
+                            <div className="grid-66">
+                                <div className="course--header">
+                                    <h4 className="course--label">Course</h4>
+                                    <h3 className="course--title">{course.title}</h3>
+                                    <p>By {user.firstName} {user.lastName}</p>
+                                </div>
                             </div>
+                            <div className="course--description">
+                                <p>{course.description}</p>
+                            </div>
+                            <div className="grid-25 grid-right">
+                                <div className="course--stats">
+                                    <ul className="course--stats--list">
+                                        <li className="course--stats--list--item">
+                                            <h4>Estimated Time</h4>
+                                            <h3>{course.estimatedTime}</h3>
+                                        </li>
+                                        <li className="course--stats--list--item">
+                                            <h4>Materials Needed</h4>
+                                            <ul>
+                                                <li>{materials}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-            </Fragment>
+                </Fragment>
+                :
+                <Fragment>
+                    <Redirect to='/signin'/>
+                </Fragment>
+                }
+            </div>
         );
     }
 

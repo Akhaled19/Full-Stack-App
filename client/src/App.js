@@ -50,8 +50,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
             <Route path='/courses' component={CoursesWithContext} />
+            <PrivateRoute exact path='/courses/create' component={CreateCourseWithContext}/>
             <Route path='courses/:id' component={CourseDetailWithContext} />
-            <PrivateRoute path='/courses/create' component={CreateCourseWithContext}/>
             <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>
             <Route path='/signin' component={UserSignInwithContext} />
             <Route path='/signup' component={UserSignUpWithContext} />

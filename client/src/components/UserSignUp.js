@@ -127,13 +127,13 @@ export default class UserSignUp extends Component {
                         console.log(`${emailAddress} is succesfully signed up and authenticated!`);
                         context.actions.signIn(emailAddress, password)
                         //redirect the user back to the page they were trying to access once they’re authenticated 
-                        .then(() => this.props.history.push('/'))
+                        this.props.history.push('/')
                     }
                 })
                 .catch( err => { //handle rejected promise
                     console.log('Something went wrong', err);
                     this.props.history.push('/error'); //push error path to history stack
-                })
+                });
             //else, set the errors state property to an a string with error details     
         }  else {
             this.setState({
