@@ -21,7 +21,7 @@ export default class Data {
             method,
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                // 'Access-Control-Allow-origin': '*',
+                'Access-Control-Allow-origin': '*',
             },
         };
 
@@ -33,7 +33,7 @@ export default class Data {
         //check if the auth is required
         if(requiresAuth){
             //btoa() method creates a base-64 encoded ASCII string from a ‘string’ of data.
-            const encodedCredentials = btoa(`${credentials.password}`);
+            const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
             //send an authorization header on each required auth request 
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
