@@ -20,8 +20,8 @@ export default class Data {
         const options = {
             method,
             headers: {
-                'Content-Type': 'application/jason; charset=utf-8',
-                'Acess-control-Allow-origin': '*',
+                'Content-Type': 'application/json; charset=utf-8',
+                // 'Access-Control-Allow-origin': '*',
             },
         };
 

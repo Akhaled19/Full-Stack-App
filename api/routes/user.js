@@ -25,6 +25,7 @@ router.post('/users', asyncHandler(async(req, res) => {
    
     try {
         const user = req.body;
+        console.log(`This is the body logged`, req.body);
         //if the req body includes a password 
         if(user.password) {
             //hashing & salting the user's pasword before the user is added to the users array
