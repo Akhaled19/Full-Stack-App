@@ -7,7 +7,7 @@ function asyncHandler(callback) {
         try {
             await callback(req, res, next)
         } catch (error) {
-            console.log(error);
+            console.log('asyncHandler errors', error);
             res.status(500).json({message: error.message});
             next(error)
         }

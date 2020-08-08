@@ -4,7 +4,7 @@ const {User} = require('./models');
 
 //Authentication Middleware to wrap eeach route that needs to be protected 
 const authenticateUser = async(req, res, next) => {
-    let message =  '';
+    let message =  null;
     //parse the user's credentials from the authorization header 
     const credentials = auth(req);
 
