@@ -107,7 +107,7 @@ export default class UserSignUp extends Component {
             confirmPassword,
         } = this.state
 
-        //new payload will be send to the API
+        //new payload will be sent to the API
         const user = {
             firstName,
             lastName,
@@ -127,7 +127,7 @@ export default class UserSignUp extends Component {
                         console.log(`${emailAddress} is succesfully signed up and authenticated!`);
                         context.actions.signIn(emailAddress, password)
                         //redirect the user back to the page they were trying to access once they’re authenticated 
-                        this.props.history.push('/')
+                        this.props.history.push('/signin')
                     }
                 })
                 .catch( err => { //handle rejected promise
