@@ -82,11 +82,10 @@ class UserSignIn extends Component {
 
     
         context.actions.signIn(emailAddress, password)
-            .then((user) => {
+            .then(user => {
+                console.log('User:', user);
                 if(user === null ) {
-                    this.setState(() => {
-                        return {errors: ['Sign-in was unsuccessful']} 
-                    });
+                    this.setState(() => ({errors: ['Sign-in was unsuccessful.'] }));
                 }
                 else {
                     this.props.history.push('')
