@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 // import axios from 'axios';
@@ -26,7 +26,7 @@ const CourseDetailWithContext = withContext(CourseDetail);
 const CreateCourseWithContext = withContext(CreatCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
  
-class App extends Component {
+function App(){
   // constructor() {
   //   super();
   // }
@@ -41,26 +41,24 @@ class App extends Component {
   //       console.log(response.data);
   //     })
   // }
-  render() {
     return (
       <BrowserRouter>
         <div>
           <HeaderWithContext />
 
           <Switch>
-            <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
             <Route path='/courses' component={CoursesWithContext} />
-            <PrivateRoute exact path='/courses/create' component={CreateCourseWithContext}/>
-            <Route path='courses/:id' component={CourseDetailWithContext} />
-            <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>
             <Route path='/signin' component={UserSignInwithContext} />
             <Route path='/signup' component={UserSignUpWithContext} />
+            <PrivateRoute strict exact path='/courses/create' component={CreateCourseWithContext}/>
+            <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>
+            <Route path='courses/:id' component={CourseDetailWithContext} />
             <Route path='/signout' component={UserSignOutWithContext}/>
+            <Route exact path='/' render={ () => <Redirect to='/courses'/>}/>
             <Route component={NotFound}/>
           </Switch>
         </div>
       </BrowserRouter>
     );
-  }
 }  
 export default App;
