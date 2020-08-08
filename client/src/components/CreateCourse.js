@@ -3,6 +3,7 @@ import Form from '../Form';
 
 
 class CreateCourse extends Component {
+
     state = {
         title: '',
         description: '',
@@ -16,10 +17,14 @@ class CreateCourse extends Component {
             description,
             estimatedTime,
             materialsNeeded,
-            errors
+            errors,
+            authenticatedUser
         } = this.state;
+        const {context} = this.props;
+        const authUser = context.authenticatedUser;
+        console.log('this the current user', authUser);
         return(
-            <div class="bounds course--detail">
+            <div className="bounds course--detail">
                 <h1>Create Course</h1>
                 <Form 
                     cancel={this.cancel}
@@ -42,7 +47,7 @@ class CreateCourse extends Component {
                                             onChange={this.change}
                                         />
                                     </div>
-                                    <p>By Joe Smith</p>
+                                    <p>By {authUser.firstName} {authUser.lastName}</p>
                                 </div>
                                 <div className="course--description">
                                     <div>
