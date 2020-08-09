@@ -85,7 +85,7 @@ class UserSignIn extends Component {
             .then(user => {
                 console.log('User:', user);
                 if(user === null ) {
-                    this.setState(({errors: message['Sign-in was unsuccessful.']}));
+                    this.setState({errors:[ {message: 'Sign-in was unsuccessful.'} ]});
                 }
                 else {
                     this.props.history.push('')

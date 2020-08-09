@@ -116,6 +116,10 @@ class CreateCourse extends Component {
     //create a course
     submit = () => {
        const {context} = this.props;
+       //authenticated user info to be used for the new course entry  
+       const {emailAddress} = context.authenticatedUser;
+       const {password} = context.authenticatedUser;
+       const userId = context.authenticatedUser.id;
 
        const {
            title,
@@ -124,10 +128,6 @@ class CreateCourse extends Component {
            materialsNeeded,
        } = this.state;
 
-       //authenticated user info to be used for the new course entry  
-       const password = context.authenticatedUser.password; //decode password 
-       const userId = context.authenticatedUser.id;
-       const emailAddress = context.authenticatedUser.emailAddress;
        
        //new payload will be sent to the API
         const course = {
@@ -145,21 +145,20 @@ class CreateCourse extends Component {
          * @param{string} password - user decoded password
          */
         context.data.createCourse(course, emailAddress, password)
-            console.log('this the course payload', course)
             .then(errors => {
                 //check if there are any errors returned from the API
                 if(errors.length){
-                    console.log('creat course errors', errors)
+                    console.log('errors list of creat course', errors);
                     this.setState({errors});
 
                 //else pass the payload to the API    
                 } else {
-                    this.props.history.push('/');
                     console.log(`SUCESS: ${course} is now passed in!`);
+                    this.props.history.push('/');
                 }
             })
             .catch(err => {
-                console.error(err);
+                console.error('Something went wrong',err);
                 this.props.history.push('/error'); //push to history stack
             });
 
