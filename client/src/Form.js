@@ -42,7 +42,7 @@ function ErrorsDisplay({ errors }) {
     let errorsDisplay = null;
 
     if(errors.length && typeof errors !== 'string') {
-        console.log('the sign in errors', errors);
+        console.log('the sign in errors', errors[0]);
         errorsDisplay = (
             <div>
                 <h2 className="validation--errors--label">Validation errors</h2>
