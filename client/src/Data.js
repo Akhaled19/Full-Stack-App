@@ -84,13 +84,14 @@ export default class Data {
      * If the HTTP response is 400, the response data errors are returned 
      * A new error is thrown when an unexpected error occurs 
     */
-    async createCourse(course){
-        const response = await this.api(`courses/create`, 'POST', course, true, null);
+    async createCourse(course, emailAddress, password){
+        const response = await this.api('/courses', 'POST', course, true, {emailAddress, password});
         if(response.status === 201) {
             return []
         }
         if(response.status === 400) {
-            return response.json(data => {
+            return response.json().then(data => {
+                console.log(' form.js create course errors from the api', data.errors);
                 return data.errors;
             });       
         }

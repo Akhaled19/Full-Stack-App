@@ -18,11 +18,12 @@ class CreateCourse extends Component {
             estimatedTime,
             materialsNeeded,
             errors,
-            authenticatedUser
         } = this.state;
+
         const {context} = this.props;
         const authUser = context.authenticatedUser;
         console.log('this the current user', authUser);
+
         return(
             <div className="bounds course--detail">
                 <h1>Create Course</h1>
@@ -123,15 +124,45 @@ class CreateCourse extends Component {
            materialsNeeded,
        } = this.state;
 
+       //authenticated user info to be used for the new course entry  
+       const password = context.authenticatedUser.password; //decode password 
+       const userId = context.authenticatedUser.id;
+       const emailAddress = context.authenticatedUser.emailAddress;
+       
        //new payload will be sent to the API
         const course = {
             title,
             description,
             estimatedTime,
-            materialsNeeded
+            materialsNeeded,
+            userId,
         }
 
-       //before creating a course, check if the user is authenticated 
+        /**
+         * createCourse method sends request to the API using input course data and userAuth
+         * @param{object} course - contains all course information to be submitted to API
+         * @param{string} emailAddress - user email
+         * @param{string} password - user decoded password
+         */
+        context.data.createCourse(course, emailAddress, password)
+            console.log('this the course payload', course)
+            .then(errors => {
+                //check if there are any errors returned from the API
+                if(errors.length){
+                    console.log('creat course errors', errors)
+                    this.setState({errors});
+
+                //else pass the payload to the API    
+                } else {
+                    this.props.history.push('/');
+                    console.log(`SUCESS: ${course} is now passed in!`);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                this.props.history.push('/error'); //push to history stack
+            });
+
     }
 
     //Handle course submit cancelation
