@@ -118,7 +118,7 @@ class CreateCourse extends Component {
        const {context} = this.props;
        //authenticated user info to be used for the new course entry  
        const {emailAddress} = context.authenticatedUser;
-       const {password} = context.authenticatedUser;
+       const password = context.authenticatedUser.password; //decoded password
        const userId = context.authenticatedUser.id;
 
        const {
@@ -158,7 +158,7 @@ class CreateCourse extends Component {
                 }
             })
             .catch(err => {
-                console.error('Something went wrong',err);
+                console.error('Something went wrong', err);
                 this.props.history.push('/error'); //push to history stack
             });
 

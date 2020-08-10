@@ -68,6 +68,7 @@ router.post('/courses', authenticateUser, asyncHandler(async(req, res) => {
     try{
         //if all the required fields have been submitted, redirect to home & set HTTP status code to 201 
         course = await Course.create(req.body);
+        console.log('the course body logged here', course);
         res.status(201).location(`/api/courses/${course.id}`).end();
 
     } catch (error){

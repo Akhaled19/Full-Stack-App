@@ -86,6 +86,7 @@ export default class Data {
     */
     async createCourse(course, emailAddress, password){
         const response = await this.api('/courses', 'POST', course, true, {emailAddress, password});
+        console.log('user info from data.js',emailAddress, password);
         console.log(`This is the course object in createUser`, course);
         if(response.status === 201) {
             return [];
