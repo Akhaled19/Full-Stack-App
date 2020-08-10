@@ -118,7 +118,7 @@ class CreateCourse extends Component {
        const {context} = this.props;
        //authenticated user info to be used for the new course entry  
        const {emailAddress} = context.authenticatedUser;
-       const password = context.authenticatedUser.password; //decoded password
+       const password = atob(context.authenticatedUser.password); //decoded password
        const userId = context.authenticatedUser.id;
 
        const {
