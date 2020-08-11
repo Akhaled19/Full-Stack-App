@@ -40,11 +40,9 @@ class CourseDetails extends Component {
 
     render() {
         const {course, materials, user} = this.state;
-        const authUser = this.context.authenticatedUser;
 
         return(
             <div>
-                { authUser ?
                 <Fragment>
                     <div className="actions--bar">
                         <div className="bounds">
@@ -63,10 +61,13 @@ class CourseDetails extends Component {
                                     <h3 className="course--title">{course.title}</h3>
                                     <p>By {user.firstName} {user.lastName}</p>
                                 </div>
-                            </div>
-                            <div className="course--description">
-                                <p>{course.description}</p>
-                            </div>
+                                <div className="course--description">
+                                    <p>{course.description}</p>
+                                    {/* {course.description.split("\n").map((i,key) => {
+                                        return <p key={key}>{i}</p>
+                                    })} */}
+                                </div>
+                            </div>    
                             <div className="grid-25 grid-right">
                                 <div className="course--stats">
                                     <ul className="course--stats--list">
@@ -78,19 +79,17 @@ class CourseDetails extends Component {
                                             <h4>Materials Needed</h4>
                                             <ul>
                                                 <li>{materials}</li>
+                                                {/* {materials.split('\n').map((material, key) => {
+                                                    return <li key={key}>{material}</li>
+                                                })} */}
                                             </ul>
                                         </li>
                                     </ul>
                                 </div>
-                        </div>
+                            </div>
                         </div>
                     </div>
                 </Fragment>
-                :
-                <Fragment>
-                    <Redirect to='/signin'/>
-                </Fragment>
-                }
             </div>
         );
     }

@@ -93,8 +93,8 @@ export default class Data {
         }
         if(response.status === 400) {
             return response.json().then(data => {
-                console.log(' form.js create course errors from the api', data.errors);
-                return data.errors;
+                console.log(' form.js create course errors from the api', data);
+                return data;
             });       
         }
         throw new Error();
