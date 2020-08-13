@@ -112,27 +112,42 @@ export default class Data {
      * If the HTTP response is 400, the response data errors are returned 
      * A new error is thrown when an unexpected error occurs 
     */
-   async updateCourse(course, emailAddress, password){
+    async updateCourse(course, emailAddress, password){
        const response = await this.api(`/courses/${course.id}`, 'PUT', course, true, {emailAddress, password});
-       if(response.status === 204) {
+        if(response.status === 204) {
            return [];
-       }
-       if(response.status === 400){
-           return response.json().then(data => {
+        }
+        if(response.status === 400){
+            return response.json().then(data => {
                console.log(`form.js update course errors from the api`, data);
                return data;
-           });
-       }
-       throw new Error();
-   }
+            });
+        } 
+        throw new Error();
+    }
 
     /** 
      * 'DeleteCourses' method perform a syn operation that delete a course payload 
-     * @param {number} courseId 
+     * @param {course} course
+     * @param {string} emailAddress
+     * @param {string} password 
      * If the HTTP response is 201, an emprty array is returned 
      * If the HTTP response is 400, the response data errors are returned 
      * A new error is thrown when an unexpected error occurs 
     */
+    async deleteCourse(courseId, emailAddress, password){
+        const response = await this.api(`/courses/${courseId}`, 'DELETE', course, true, {emailAddress, password});   
+        if(response.status === 204) {
+            return [];
+        }
+        if(response.status === 400){
+            return response.json().then(data => {
+               console.log(`form.js update course errors from the api`, data);
+               return data;
+            });
+        } 
+        throw new Error();
+    }
 
 
     /** 
