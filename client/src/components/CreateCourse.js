@@ -141,7 +141,7 @@ class CreateCourse extends Component {
         }
 
         /**
-         * createCourse method sends request to the API using input course data and userAuth
+         * createCourse method sends POST request to the API using input course data and userAuth
          * @param{object} course - contains all course information to be submitted to API
          * @param{string} emailAddress - user email
          * @param{string} password - user decoded password
