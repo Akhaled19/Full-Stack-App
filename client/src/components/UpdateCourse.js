@@ -182,7 +182,7 @@ class UpdateCourse extends Component {
             user
         }
 
-        //authenticated the user info to update ONLY their courses 
+        //user credentials 
         const {emailAddress} = context.authenticatedUser;
         const password = atob(context.authenticatedUser.password); //decoded password
 

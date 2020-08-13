@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from 'react';
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class CourseDetails extends Component {
     state={
         course: {},
+        id: '',
         user: {},  
         materials: [],
     }
@@ -26,6 +27,7 @@ class CourseDetails extends Component {
                 this.setState({
                     course: response.course,
                     materials: materials,
+                    id: response.course.id,
                     user: response.course.userInfo,
                 })
             } else {
@@ -49,7 +51,7 @@ class CourseDetails extends Component {
                             <div className="grid-100">
                                 <span>
                                     <Link className="button" to={`/courses/${course.id}/update`}>Update Course</Link>
-                                    <Link className="button" to={`/courses/${course.id}/delete`}>Delete Course</Link>
+                                    <button className="button" type="submit" onClick={this.delete}>Delete Course</button>
                                 </span>
                                 <Link className="button button-secondary" to="/">Return to the List</Link>
                             </div>
@@ -92,6 +94,32 @@ class CourseDetails extends Component {
                 </Fragment>
             </div>
         );
+    }
+
+    //handle course deletation 
+    delete = () => {
+        const {context} = this.props;
+        const {id} = this.state;
+        //user credentials 
+        const {emailAddress} = context.authenticatedUser;
+        const password = atob(context.authenticatedUser.password);
+
+        /**
+         * deleteCourse method sends DELETE request to the API using the course id and userAuth
+         * @param{string} id - contains course id to be submitted to API
+         * @param{string} emailAddress - user email
+         * @param{string} password - user decoded password
+         */
+
+        context.data.deleteCourse(id, emailAddress, password)
+        .then( () => {
+          this.props.history.push('/');
+        })
+        .catch(err => {
+            console.error(err);
+            this.props.history.push('/error');
+        });
+
     }
 
 } 

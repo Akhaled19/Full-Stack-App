@@ -136,7 +136,7 @@ export default class Data {
      * A new error is thrown when an unexpected error occurs 
     */
     async deleteCourse(courseId, emailAddress, password){
-        const response = await this.api(`/courses/${courseId}`, 'DELETE', course, true, {emailAddress, password});   
+        const response = await this.api(`/courses/${courseId}`, 'DELETE', null, true, {emailAddress, password});   
         if(response.status === 204) {
             return [];
         }
