@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom'
+import WindowPopUp from './WindowPopUp';
 
 class CourseDetails extends Component {
     state={
@@ -7,6 +8,14 @@ class CourseDetails extends Component {
         id: '',
         user: {},  
         materials: [],
+        seen: false,
+    }
+
+    //set the seen state to true 
+    togglePop = () => {
+        this.setState({
+            seen: !this.state.seen
+        })
     }
 
     /**
@@ -46,12 +55,16 @@ class CourseDetails extends Component {
         return(
             <div>
                 <Fragment>
+                    {this.state.seen ? 
+                        <WindowPopUp toggle={this.togglePop} onDelete={this.onDelete}/>
+                    : null    
+                    }
                     <div className="actions--bar">
                         <div className="bounds">
                             <div className="grid-100">
                                 <span>
                                     <Link className="button" to={`/courses/${course.id}/update`}>Update Course</Link>
-                                    <button className="button" type="submit" onClick={this.delete}>Delete Course</button>
+                                    <button className="button" type="submit" onClick={this.togglePop}>Delete Course</button>
                                 </span>
                                 <Link className="button button-secondary" to="/">Return to the List</Link>
                             </div>
@@ -97,7 +110,7 @@ class CourseDetails extends Component {
     }
 
     //handle course deletation 
-    delete = () => {
+    onDelete = () => {
         const {context} = this.props;
         const {id} = this.state;
         //user credentials 
