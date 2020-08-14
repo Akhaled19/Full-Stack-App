@@ -1,9 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-// import axios from 'axios';
-// import config from './config';
-
+//import components
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 import Header from './components/Header';
@@ -15,6 +13,7 @@ import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import UserSignOut from './components/UserSignOut';
 import NotFound from './components/NotFound';
+import Forbidden from './components/Forbidden';
 
 //Subscribe components to context changes
 const UserSignUpWithContext = withContext(UserSignUp);
@@ -27,20 +26,6 @@ const CreateCourseWithContext = withContext(CreatCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
  
 function App(){
-  // constructor() {
-  //   super();
-  // }
-
-  // componentDidMount = () => {
-  //   this.courses();
-  // }
-  // courses = () => {
-  //   const apiBaseUrl = config.apiBaseUrl;
-  //   axios.get(apiBaseUrl)
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-  // }
     return (
       <BrowserRouter>
         <div>
@@ -54,7 +39,7 @@ function App(){
             <Route path='/signin' component={UserSignInwithContext} />
             <Route path='/signup' component={UserSignUpWithContext} />
             <Route path='/signout' component={UserSignOutWithContext}/>
-            {/* <Route exact path='/' render={ () => <Redirect to='/courses'/>}/> */}
+            <Route path='/forbidden' component={Forbidden}/>
             <Route component={NotFound}/>
           </Switch>
         </div>

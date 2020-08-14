@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import {Link} from 'react-router-dom';
 import Form from '../Form';
 
 class UpdateCourse extends Component {
@@ -44,7 +43,7 @@ class UpdateCourse extends Component {
                             }else {
                                 console.log('the course owner id',user.id);
                                 console.log('the current authorized user id',authenticatedUser.id);
-                                this.props.history.push('/forbident'); //change to forbidden 
+                                this.props.history.push('/forbidden'); 
                             }
                         }else {
                             this.props.history.push('/notfound');
