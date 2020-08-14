@@ -11,13 +11,6 @@ class CourseDetails extends Component {
         seen: false,
     }
 
-    //set the seen state to true 
-    togglePop = () => {
-        this.setState({
-            seen: !this.state.seen
-        })
-    }
-
     /**
      * At componentDidMount the getCourse() method is called from context.
      * State property 'course' is set using the data returned from getCourse().
@@ -55,9 +48,9 @@ class CourseDetails extends Component {
         return(
             <div>
                 <Fragment>
-                    {this.state.seen ? 
+                    {this.state.seen ? (
                         <WindowPopUp toggle={this.togglePop} onDelete={this.onDelete}/>
-                    : null    
+                    ): null    
                     }
                     <div className="actions--bar">
                         <div className="bounds">
@@ -133,6 +126,13 @@ class CourseDetails extends Component {
             this.props.history.push('/error');
         });
 
+    }
+
+    //set the seen state to true 
+    togglePop = () => {
+        this.setState( prevState => ({
+            seen: !prevState.seen
+        }))
     }
 
 } 

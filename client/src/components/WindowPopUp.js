@@ -23,7 +23,7 @@ import React, { Component } from 'react';
                     <span className="close" onClick={this.handleClick}>&times;</span>
                     <form>
                         <h3>Are you sure you want to delete this course?</h3>
-                        <h2>All information associated with this course will be permanently deleted.</h2>
+                        <h3>All information associated with this course will be permanently deleted.</h3>
                         <button className="button" type="submit" onClick={this.delete}>Delete Course</button>
                     </form>
                 </div>
