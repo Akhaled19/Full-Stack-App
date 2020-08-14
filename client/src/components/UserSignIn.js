@@ -74,7 +74,7 @@ class UserSignIn extends Component {
     //create a user
     submit = () => {
         const { context } = this.props;
-
+        const {from} = this.props.location.state || {from: { pathname: '/'} };
         const {
             emailAddress,
             password,
@@ -88,7 +88,7 @@ class UserSignIn extends Component {
                     this.setState({errors:[ {message: 'Sign-in was unsuccessful.'} ]});
                 }
                 else {
-                    this.props.history.push('')
+                    this.props.history.push(from);
                     console.log(`success: ${emailAddress} is now signed in!`)
                 }
             })
