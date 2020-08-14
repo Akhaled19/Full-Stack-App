@@ -1,7 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import {withRouter, Link} from 'react-router-dom'
-// import config from '../config';
-// import axios from 'axios';
 
 class Courses extends Component {
     state = {

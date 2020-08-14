@@ -46,12 +46,12 @@ class UpdateCourse extends Component {
                                 this.props.history.push('/forbidden'); 
                             }
                         }else {
-                            this.props.history.push('/notfound');
+                            this.props.history.push('/error');
                         }
                     })
                     .catch(err => {
                         console.error(err);
-                        this.props.history.push('/error');
+                        this.props.history.push('/notfound');
                     });
     }                
     render() {

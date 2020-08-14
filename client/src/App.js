@@ -14,6 +14,7 @@ import UserSignUp from './components/UserSignUp';
 import UserSignOut from './components/UserSignOut';
 import NotFound from './components/NotFound';
 import Forbidden from './components/Forbidden';
+import UnhandledError from './components/UnhandledError'
 
 //Subscribe components to context changes
 const UserSignUpWithContext = withContext(UserSignUp);
@@ -33,6 +34,7 @@ function App(){
 
           <Switch>
             <Route exact path='/' component={CoursesWithContext} />
+            <Route path='/error' component={UnhandledError} />
             <PrivateRoute path='/courses/create' component={CreateCourseWithContext}/>
             <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>
             <Route path='/courses/:id' component={CourseDetailWithContext} />
