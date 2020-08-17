@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Form from '../Form';
 
+/**
+ * Renders the sign up page
+ */
 export default class UserSignUp extends Component {
     state = {
         firstName: '',
@@ -88,6 +91,7 @@ export default class UserSignUp extends Component {
         const name = event.target.name;
         const value = event.target.value;
 
+        //update the value 
         this.setState(() => {
             return {
                 [name]: value
@@ -99,6 +103,7 @@ export default class UserSignUp extends Component {
     submit = () => {
         const { context } = this.props;
 
+        //destructure the states
         const {
             firstName,
             lastName,

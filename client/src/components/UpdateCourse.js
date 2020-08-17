@@ -4,7 +4,6 @@ import Form from '../Form';
 class UpdateCourse extends Component {
 
     state={
-        // course:{},
         user:{},
         id:'',
         title: '',
@@ -12,12 +11,11 @@ class UpdateCourse extends Component {
         estimatedTime: '',
         materialsNeeded: '',
         errors:[] 
-    }
-    
+    } 
 
     /**
      * At componentDidMount the createCourse() method is called from context.
-     * State property 'course' is set using the data returned from updateCourse().
+     * State propertIES 'user', 'id', 'title', 'description', 'estimatedTime', 'materialsNeeded' and 'errors' are set using the data returned from updateCourse().
      * Errors are caught and logged using catch() and the user is returned to the '/error' endpoint
      */
 
@@ -30,9 +28,9 @@ class UpdateCourse extends Component {
                     .then(response => {
                         const user = response.course.userInfo;
                         if(response) {
+                            //if the current authenticated user is same as the course owner, allow to set state   
                             if(authenticatedUser.id === user.id) {
                                 this.setState({
-                                    // course: response.course,
                                     id: response.course.id,
                                     title: response.course.title,
                                     description: response.course.description,
@@ -40,6 +38,7 @@ class UpdateCourse extends Component {
                                     materialsNeeded: response.course.materialsNeeded,
                                     user: response.course.userInfo,
                                 });
+                            //if the authenticated user is not the course owner render the /forbidden endpoint    
                             }else {
                                 console.log('the course owner id',user.id);
                                 console.log('the current authorized user id',authenticatedUser.id);
@@ -55,6 +54,7 @@ class UpdateCourse extends Component {
                     });
     }                
     render() {
+        //destructure states
         const {
             user,
             title,
@@ -159,9 +159,8 @@ class UpdateCourse extends Component {
     //update the course
     submit = () => {
         const {context} = this.props;
-        //const userId = context.authenticatedUser.id; 
 
-        //destructure 
+        //destructure states 
         const {
             id,
             title,

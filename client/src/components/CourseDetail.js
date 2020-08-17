@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom'
+import ReactMarkdown from 'react-markdown';
 import WindowPopUp from './WindowPopUp';
 
-class CourseDetails extends Component {
+class CourseDetail extends Component {
     state={
         course: {},
         id: '',
@@ -13,7 +14,8 @@ class CourseDetails extends Component {
 
     /**
      * At componentDidMount the getCourse() method is called from context.
-     * State property 'course' is set using the data returned from getCourse().
+     * @param {string} id - is the ui params 
+     * State properties 'course', 'materials', 'id', and 'user' are set using the data returned from getCourse().
      * Errors are caught and logged using catch() and the user is routed to the '/error' endpoint 
     */
     componentDidMount() {
@@ -24,8 +26,6 @@ class CourseDetails extends Component {
         .then(response => {
             if(response) {
                 let  materials = response.course.materialsNeeded;
-                // if(materials !== null )
-                console.log(response.course);
                 this.setState({
                     course: response.course,
                     materials: materials,
@@ -38,7 +38,7 @@ class CourseDetails extends Component {
         })
         .catch(err => {
             console.error(err);
-            this.props.history.push('/notfound');
+            this.props.history.push('/error');
         });
     }
 
@@ -62,7 +62,6 @@ class CourseDetails extends Component {
                                         <button className="button" type="submit" onClick={this.togglePop}>Delete Course</button>
                                         <Link className="button button-secondary" to="/">Return to the List</Link> 
                                     </span>
-                                    
                                 ): (
                                     <span>
                                         <Link className="button button-secondary" to="/">Return to the List</Link> 
@@ -78,10 +77,9 @@ class CourseDetails extends Component {
                                     <p>By {user.firstName} {user.lastName}</p>
                                 </div>
                                 <div className="course--description">
-                                    <p>{course.description}</p>
-                                    {/* {course.description.split("\n").map((i,key) => {
-                                        return <p key={key}>{i}</p>
-                                    })} */}
+                                    <p>
+                                        <ReactMarkdown source={course.description} />
+                                    </p>
                                 </div>
                             </div>    
                             <div className="grid-25 grid-right">
@@ -94,10 +92,7 @@ class CourseDetails extends Component {
                                         <li className="course--stats--list--item">
                                             <h4>Materials Needed</h4>
                                             <ul>
-                                                <li>{materials}</li>
-                                                {/* {materials.split('\n').map((material, key) => {
-                                                    return <li key={key}>{material}</li>
-                                                })} */}
+                                                <ReactMarkdown source={materials} />
                                             </ul>
                                         </li>
                                     </ul>
@@ -114,6 +109,7 @@ class CourseDetails extends Component {
     onDelete = () => {
         const {context} = this.props;
         const {id} = this.state;
+
         //user credentials 
         const {emailAddress} = context.authenticatedUser;
         const password = atob(context.authenticatedUser.password);
@@ -133,7 +129,6 @@ class CourseDetails extends Component {
             console.error(err);
             this.props.history.push('/error');
         });
-
     }
 
     //set the seen state to true 
@@ -142,6 +137,5 @@ class CourseDetails extends Component {
             seen: !prevState.seen
         }))
     }
-
 } 
-export default CourseDetails;
+export default CourseDetail;

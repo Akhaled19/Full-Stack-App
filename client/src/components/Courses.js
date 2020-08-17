@@ -8,7 +8,7 @@ class Courses extends Component {
 
       /**
        * At componentDidMount the getCourses() method is called from context.
-       * State properties 'courses' are set using the data returned from getCourses().
+       * State property 'courses' is set using the data returned from getCourses().
        * Errors are caught and logged using catch() and the user is routed to the '/error' endpoint 
        */
     
@@ -16,7 +16,6 @@ class Courses extends Component {
         const { context } = this.props;
         context.data.getCourses()
             .then(response => {
-                console.log(response.courses);
                 this.setState({courses: response.courses})
             })
             .catch( err => {

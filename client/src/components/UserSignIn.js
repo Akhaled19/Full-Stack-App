@@ -2,6 +2,10 @@ import React, {Component, Fragment} from 'react';
 import {NavLink} from 'react-router-dom';
 import Form from '../Form';
 
+
+/**
+ * Render the sign in page
+ */
 class UserSignIn extends Component {
     state = {
         emailAddress: '',
@@ -64,6 +68,7 @@ class UserSignIn extends Component {
         const name = event.target.name;
         const value = event.target.value;
 
+        //update the value
         this.setState(() => {
             return {
                 [name]: value
@@ -74,7 +79,9 @@ class UserSignIn extends Component {
     //create a user
     submit = () => {
         const { context } = this.props;
+        //holds the last accesed route 
         const {from} = this.props.location.state || {from: { pathname: '/'} };
+        //destructure the states
         const {
             emailAddress,
             password,

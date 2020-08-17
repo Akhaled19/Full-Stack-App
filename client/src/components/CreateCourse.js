@@ -22,7 +22,6 @@ class CreateCourse extends Component {
 
         const {context} = this.props;
         const authUser = context.authenticatedUser;
-        console.log('this the current user', authUser);
 
         return(
             <div className="bounds course--detail">
@@ -108,6 +107,7 @@ class CreateCourse extends Component {
         const name = event.target.name;
         const value = event.target.value
 
+        //update the value
         this.setState(() => {
             return {
                 [name]: value
@@ -118,11 +118,13 @@ class CreateCourse extends Component {
     //create a course
     submit = () => {
        const {context} = this.props;
-       //authenticated user info to be used for the new course entry  
-       const {emailAddress} = context.authenticatedUser;
+
+       //user credentials to be used for the new course entry  
+       const {emailAddress} = context.authenticatedUser; 
        const password = atob(context.authenticatedUser.password); //decoded password
        const userId = context.authenticatedUser.id;
 
+       //destructure states 
        const {
            title,
            description,
