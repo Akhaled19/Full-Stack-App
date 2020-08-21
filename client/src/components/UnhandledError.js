@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 /**
  * Error is a statless function component 
@@ -10,6 +11,7 @@ const Error = () => {
         <div>
             <h1>ERROR</h1>
             <p>Sorry! Looks like there was an error</p>
+            <Link className="button button-secondary" to="/">Return to the List</Link>  
         </div>
     );
 }
