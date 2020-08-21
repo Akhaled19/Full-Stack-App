@@ -103,6 +103,9 @@ export default class UserSignUp extends Component {
     submit = () => {
         const { context } = this.props;
 
+        //holds the last accesed route 
+        const {from} = this.props.location.state || {from: { pathname: '/'} };
+
         //destructure the states
         const {
             firstName,
@@ -132,7 +135,7 @@ export default class UserSignUp extends Component {
                         console.log(`${emailAddress} is succesfully signed up and authenticated!`);
                         context.actions.signIn(emailAddress, password)
                         //redirect the user back to the page they were trying to access once they’re authenticated 
-                        this.props.history.push('/')
+                        this.props.history.push(from);
                     }
                 })
                 .catch( err => { //handle rejected promise
